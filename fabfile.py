@@ -12,6 +12,11 @@ DEPLOY_VERSION = os.environ.get('DEPLOY_VERSION', datetime.datetime.now().strfti
 
 
 def deploy():
+    p = subprocess.Popen(
+        ('git', 'rev-parse', 'HEAD'),
+        stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    revision = p.stdout.read().strip()
+
     remote_dir = "/var/apps/django-sample-app/releases/{0}".format(DEPLOY_VERSION)
     virtualenv_dir = "{0}/virtualenv".format(remote_dir)
 
@@ -21,6 +26,8 @@ def deploy():
         exclude=("local_settings.py", "*.pyc", "*~", '._*', ".git",),
         delete=True,
     )
+
+    sed('{remote_dir}/django_sample_app/settings.py'.format(remote_dir=remote_dir), '__FABRIC_REVISION__', revision)
 
     run('virtualenv --python=/usr/bin/python2.7 {virtualenv_dir}'.format(
         virtualenv_dir=virtualenv_dir,
