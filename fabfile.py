@@ -50,3 +50,8 @@ def symlink():
 def restart():
     uwsgi_pidfile = '/var/apps/django-sample-app/run/django-sample-app-uwsgi.pid'
     run('if test -f {uwsgi_pidfile}; then sudo -u deploy kill -HUP `cat {uwsgi_pidfile}`; fi'.format(uwsgi_pidfile=uwsgi_pidfile))
+
+
+def supervisorctl(cmd, *args):
+    arg = ' '.join(args)
+    sudo('supervisorctl {cmd} {arg}'.format(cmd=cmd, arg=arg), shell=False)
