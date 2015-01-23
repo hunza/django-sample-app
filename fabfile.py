@@ -25,6 +25,7 @@ def deploy():
         local_dir="./",
         exclude=("local_settings.py", "*.pyc", "*~", '._*', ".git",),
         delete=True,
+        ssh_opts='-o StrictHostKeyChecking=no',
     )
 
     sed('{remote_dir}/django_sample_app/settings.py'.format(remote_dir=remote_dir), '__FABRIC_REVISION__', revision)
