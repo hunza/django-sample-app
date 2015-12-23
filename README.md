@@ -20,20 +20,8 @@
 ./manage.py test sample.tests.test_views.TopViewTestCase
 ```
 
-カバレッジを計測しつつテストを実行。
+カバレッジを計測しつつテストを実行。カバレッジのHTMLレポートは`cover`ディレクトリに出力されます。
 
 ```
-coverage run --source=sample ./manage.py test sample
-```
-
-カバレッジレポートを出力。
-
-```
-coverage report
-```
-
-カバレッジレポートをHTMLで`cover`ディレクトリに出力。
-
-```
-coverage html --directory=cover
+./manage.py test sample --with-coverage --cover-package=sample --cover-html
 ```
