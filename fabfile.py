@@ -29,7 +29,7 @@ def deploy():
 
     sed('{remote_dir}/sample/settings.py'.format(remote_dir=remote_dir), '__FABRIC_REVISION__', revision)
 
-    run('virtualenv --python=/usr/bin/python2.7 {virtualenv_dir}'.format(
+    run('/opt/python-3.5/bin/virtualenv {virtualenv_dir}'.format(
         virtualenv_dir=virtualenv_dir,
     ))
 
