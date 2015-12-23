@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-import datetime, time
+import datetime
 import subprocess
 import os
 
-from fabric.api import env, run, sudo
-from fabric.decorators import roles
+from fabric.api import run, sudo
 from fabric.contrib.project import rsync_project
-from fabric.contrib.files import sed, comment, uncomment, upload_template
+from fabric.contrib.files import sed
 
 DEPLOY_VERSION = os.environ.get('DEPLOY_VERSION', datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S'))
 
