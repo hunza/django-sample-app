@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
-import datetime, time
+import datetime
 import subprocess
 import os
 
-from fabric.api import env, run, sudo
-from fabric.decorators import roles
+from fabric.api import run, sudo
 from fabric.contrib.project import rsync_project
-from fabric.contrib.files import sed, comment, uncomment, upload_template
+from fabric.contrib.files import sed
 
 DEPLOY_VERSION = os.environ.get('DEPLOY_VERSION', datetime.datetime.now().strftime('%Y-%m-%d-%H-%M-%S'))
 
@@ -28,9 +27,9 @@ def deploy():
         ssh_opts='-o StrictHostKeyChecking=no',
     )
 
-    sed('{remote_dir}/django_sample_app/settings.py'.format(remote_dir=remote_dir), '__FABRIC_REVISION__', revision)
+    sed('{remote_dir}/sample/settings.py'.format(remote_dir=remote_dir), '__FABRIC_REVISION__', revision)
 
-    run('virtualenv --python=/usr/bin/python2.7 {virtualenv_dir}'.format(
+    run('/opt/python-3.5/bin/virtualenv {virtualenv_dir}'.format(
         virtualenv_dir=virtualenv_dir,
     ))
 
