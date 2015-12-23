@@ -28,7 +28,7 @@ def deploy():
         ssh_opts='-o StrictHostKeyChecking=no',
     )
 
-    sed('{remote_dir}/django_sample_app/settings.py'.format(remote_dir=remote_dir), '__FABRIC_REVISION__', revision)
+    sed('{remote_dir}/sample/settings.py'.format(remote_dir=remote_dir), '__FABRIC_REVISION__', revision)
 
     run('virtualenv --python=/usr/bin/python2.7 {virtualenv_dir}'.format(
         virtualenv_dir=virtualenv_dir,

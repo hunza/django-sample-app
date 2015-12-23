@@ -6,5 +6,5 @@ from django.contrib import admin
 
 urlpatterns = patterns(
     '',
-    url(r'', 'django_sample_app.views.top'),
+    url(r'', 'sample.views.top'),
 )
